@@ -6,7 +6,7 @@
 <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 
 
-<meta name="viewport" content="width=900, initial-scale=0.4, maximum-scale=4.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>ALDAWAA OFFERS-MONO</title>
 <link rel="icon" href="https://raw.githubusercontent.com/meralmohamed121022-cyber/Drug-Monograph/858ba78ce2719a0e7069fd4807b725e0002a17d8/6_20251129_184528_0005.png">
 <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/meralmohamed121022-cyber/Drug-Monograph/858ba78ce2719a0e7069fd4807b725e0002a17d8/6_20251129_184528_0005.png">
@@ -304,6 +304,20 @@ body {
     border-radius: 15px; box-shadow: 0 15px 45px rgba(0,0,0,0.2);
     overflow: hidden; transition: background 0.3s;
 }
+@media (max-width: 768px) {
+  .container {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    border-radius: 0 !important;
+  }
+  .offer-group-container {
+    overflow: visible !important;
+  }
+  .products-section {
+    overflow: visible !important;
+    padding: 10px 5px !important;
+  }
+}
 
 .print-button-wrapper { position: fixed; right: 20px; bottom: 20px; z-index: 1000; }
 .print-fab {
@@ -399,123 +413,6 @@ body {
 .offer-group-container { background: transparent !important; border: 1px solid var(--offer-group-border); border-radius: 12px; padding: 15px; margin-bottom: 25px; }
 .offer-group-header { display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
 
-.products-grid { display: grid; gap: 8px; grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 992px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 600px) {
-    .products-grid { display: grid; grid-template-columns: repeat(3, minmax(105px, 1fr)); gap: 4px; overflow-x: auto; padding-bottom: 5px; }
-}
-  .product-card {
-    background: var(--card-bg); border-radius:10px; padding:8px;
-    box-shadow:0 4px 15px var(--card-shadow); transition:all 0.3s ease; border:2px solid transparent;
-    display: flex; flex-direction: column;
-  }
-  .product-card:hover { transform: translateY(-5px); }
-  
-  .product-code { display:inline-block; background:linear-gradient(135deg,#e3f2fd 0%,#bbdefb 100%); color:#1976d2; padding:3px 8px; border-radius:12px; font-size:0.55em; font-weight:700; margin-bottom:6px; }
-  .product-name { font-size:0.65em; color: var(--text-main); margin-bottom:6px; font-weight:700; line-height:1.2; min-height:28px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
-  .product-offer-badge { display:inline-block; padding:4px 10px; border-radius:8px; font-size:0.6em; font-weight:900; letter-spacing:1px; margin-bottom:6px; color: white; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 2px solid #5f27cd; }
-  .product-price { display:flex; flex-direction:column; gap:4px; margin-bottom:8px; }
-  .original-price { font-size:0.7em; color: var(--text-secondary); text-decoration:line-through; font-weight:600; }
-  .product-price.no-discount .original-price { text-decoration: none; font-size: 1em; font-weight: 900; background: linear-gradient(135deg,#f5576c 0%,#764ba2 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; color: var(--text-main); }
-  .product-price.no-discount .offer-price { display: none; }
-  .offer-price { font-size:1em; background:linear-gradient(135deg,#f5576c 0%,#764ba2 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:900; }
-  .brand-box { font-weight: 700; font-size: 0.9em; color: white !important; padding: 5px 10px; border-radius: 6px; text-align: center; margin-top: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.4); text-shadow: 0 1px 3px rgba(0,0,0,0.5); border: 1px solid var(--brand-border); transition: transform 0.2s ease; }
-  .brand-box:hover { transform: scale(1.05); }
-
-  /* Theme Switch */
-  .theme-switch-wrapper { position: absolute; top: 15px; right: 15px; z-index: 100; display: flex; align-items: center; }
-  .theme-switch { display: inline-block; height: 34px; position: relative; width: 60px; }
-  .theme-switch input { display:none; }
-  .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
-  .slider:before { background-color: white; bottom: 4px; content: ""; height: 26px; left: 4px; position: absolute; transition: .4s; width: 26px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-  input:checked + .slider { background-color: #667eea; }
-  input:checked + .slider:before { transform: translateX(26px); }
-  .slider .icon { color: #f39c12; position: absolute; top: 50%; transform: translateY(-50%); font-size: 14px; transition: opacity 0.3s; }
-  .slider .sun { left: 8px; opacity: 1; }
-  .slider .moon { right: 8px; opacity: 0; color: #f1c40f; }
-  input:checked + .slider .sun { opacity: 0; }
-  input:checked + .slider .moon { opacity: 1; }
-
-  /* Spinner */
-  .spinner { border: 4px solid rgba(0,0,0,0.1); width: 50px; height: 50px; border-radius: 50%; border-left-color: #09f; animation: spin 1s ease infinite; }
-  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  /* Offer Boxes Styles */
-.offer-boxes-container {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin: 30px auto;
-  padding: 0 20px;
-  max-width: 800px;
-}
-
-.offer-box {
-  flex: 1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 15px;
-  padding: 25px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  position: relative;
-  overflow: hidden;
-}
-
-.offer-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-}
-
-.offer-box.online {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.offer-box.special {
-  /* تدرج أزرق غامق كحلي */
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-}
-.offer-box::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: rgba(255,255,255,0.1);
-  transform: rotate(45deg);
-  transition: all 0.5s ease;
-}
-
-.offer-box:hover::before {
-  left: 100%;
-}
-
-.offer-box-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  letter-spacing: 2px;
-  margin: 0;
-  position: relative;
-  z-index: 1;
-}
-
-@media (max-width: 768px) {
-  .offer-boxes-container {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .offer-box {
-    padding: 20px;
-  }
-  
-  .offer-box-title {
-    font-size: 20px;
-  }
-}
 .hero-banner {
   /* 👇 عدل الرابط هنا بصورة الخلفية اللي تحبها */
   background: 
@@ -3297,15 +3194,7 @@ input, select, textarea {
     cursor: default;
 }
 
-/* تحسين شكل الموبايل */
-@media (max-width: 768px) {
-    .magazine-nav-arrow {
-        width: 40px;
-        height: 60px;
-        font-size: 20px;
-        background: rgba(0, 0, 0, 0.1);
-    }
-}
+/
 
 /* =========================================
    🔍 ستايل مربع البحث داخل القائمة المنسدلة
@@ -3816,9 +3705,32 @@ body > div:has(> label[for="codesFileInput"]),
     padding: 3px;
     box-shadow: 0 0 35px rgba(212, 175, 55, 0.6);
     display: block;
-    /* استخدام الـ transform للرفع يحافظ على توزيع المساحات تحتها */
     transform: translateY(-275px); 
     margin-bottom: 0;
+}
+@media (max-width: 768px) {
+  #gatewayView .header-personal-img {
+    width: 90px !important;
+    height: 90px !important;
+    transform: none !important;
+    margin: 0 auto 12px auto !important;
+    display: block !important;
+  }
+  #gatewayView .gateway-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-top: 30px !important;
+  }
+  .ramadan-kareem {
+    transform: none !important;
+    font-size: 28px !important;
+    margin-top: 5px !important;
+  }
+  .sub-text {
+    transform: none !important;
+    font-size: 14px !important;
+  }
 }
 
 .ramadan-kareem {
@@ -3839,12 +3751,7 @@ body > div:has(> label[for="codesFileInput"]),
     transform: translateY(-30px);
 }
 
-/* للموبايل: العودة لنظام العمود الواحد */
-@media (max-width: 480px) {
-    #buttonsList {
-        grid-template-columns: 1fr;
-    }
-}
+
 /* إخفاء زرار الأدوات في البداية */
 #toolsSidebarToggle {
     display: none; /* مخفي في واجهة الـ Gateway */
@@ -3885,6 +3792,348 @@ body > div:has(> label[for="codesFileInput"]),
     z-index: 200000;
     transition: opacity 0.5s ease;
 }
+/* ====== 🖨️ الحل النهائي لإخفاء شريط التحديد تماماً وقت الطباعة ====== */
+@media print {
+    /* استهداف دقيق لكل المعرفات اللي ممكن تظهر تحت */
+    #printSelectionBar, 
+    .print-selection-bar,
+    #selectedCount,
+    div[id*="SelectionBar"],
+    .checkbox-container {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: absolute !important; /* عشان ميحجزش مساحة */
+        pointer-events: none !important;
+    }
+
+    /* تأكيد إخفاء الشيك بوكس نفسه عشان ميسبش نقطة بيضاء فوق الـ QR */
+    input[type="checkbox"], 
+    .product-card-checkbox {
+        display: none !important;
+        -webkit-appearance: none !important;
+    }
+}
+/* ====== 📱 نظام السلايد الاحترافي للموبايل ====== */
+/* ======= 🔥 THE ULTIMATE CARDS REFIX - Mo Edition 🔥 ======= */
+
+/* حاوية الكروت للموبايل */
+.products-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 20px !important;
+    padding: 20px 10vw !important; /* الهوامش اللي بتخلي الكروت تتسنتر */
+    direction: ltr !important; /* عشان السحب يبقى من اليمين للشمال صح */
+}
+
+/* إخفاء السكرول بار */
+.products-grid::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* تنسيق الكارت ليكون 80% من الشاشة */
+.product-card {
+    flex: 0 0 80vw !important;
+    min-width: 80vw !important;
+    max-width: 320px !important;
+    scroll-snap-align: center !important;
+    background: var(--card-bg) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 25px var(--card-shadow) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    direction: rtl !important; /* محتوى الكارت نفسه عربي */
+}
+
+/* 🎯 السحر هنا: لو كارت واحد بس، خليه في نص الشاشة بالظبط */
+.products-grid:has(> .product-card:only-child),
+.products-grid:has(> div:only-child) {
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* تظبيط الصورة */
+.product-card img {
+    width: 100% !important;
+    height: 180px !important;
+    object-fit: contain !important;
+    margin-bottom: 15px !important;
+}
+
+/* ديسكتوب - ارجع نظام الشبكة */
+@media (min-width: 1024px) {
+    .products-grid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+        flex-wrap: wrap !important;
+        overflow-x: visible !important;
+        padding: 20px !important;
+        gap: 25px !important;
+        justify-content: center !important;
+    }
+    .product-card {
+        flex: unset !important;
+        width: 100% !important;
+        min-width: unset !important;
+        max-width: none !important;
+    }
+}
+
+/* ====== MOBILE HORIZONTAL SLIDER ====== */
+@media (max-width: 768px) {
+  .offer-row-wrapper {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #667eea rgba(102,126,234,0.1) !important;
+    padding: 4px 8px 12px 8px !important;
+    gap: 12px !important;
+  }
+  .offer-row-wrapper::-webkit-scrollbar {
+    height: 4px !important;
+    display: block !important;
+  }
+  .offer-row-wrapper::-webkit-scrollbar-track {
+    background: rgba(102,126,234,0.12) !important;
+    border-radius: 2px !important;
+    margin: 0 8px !important;
+  }
+  .offer-row-wrapper::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg,#667eea,#764ba2) !important;
+    border-radius: 2px !important;
+  }
+  .brand-cluster-card {
+    flex: 0 0 75vw !important;
+    width: 75vw !important;
+    min-width: 75vw !important;
+    max-width: 75vw !important;
+    overflow: hidden !important;
+    border: none !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    border-radius: 16px !important;
+  }
+  .riyal-symbol {
+    width: 0.75em !important;
+    height: 0.75em !important;
+    margin-left: 0.1em !important;
+  }
+  img.riyal-symbol-img {
+    width: 11px !important;
+    height: 11px !important;
+    margin-right: 2px !important;
+    margin-bottom: 2px !important;
+  }
+}
+
+/* ===== MOBILE MAGAZINE SCALE FIX ===== */
+@media (max-width: 768px) {
+  .magazine-page {
+    transform: scale(1) !important;
+    transform-origin: center top !important;
+    width: 100% !important;
+    padding: 15px 8px !important;
+    margin: 0 !important;
+    border-radius: 10px !important;
+  }
+  .magazine-pagination-wrapper {
+    padding: 5px 0 !important;
+    overflow: hidden !important;
+  }
+  .magazine-pages-container {
+    overflow: hidden !important;
+  }
+  @keyframes fadeInPageMobile {
+    from { opacity: 0; transform: scale(1) translateX(30px); }
+    to   { opacity: 1; transform: scale(1) translateX(0); }
+  }
+  .magazine-page.active {
+    animation: fadeInPageMobile 0.4s ease !important;
+  }
+}
+/* ===== HERO BANNER PERSONAL IMAGE MOBILE FIX ===== */
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 20px 10px 20px 10px !important;
+    margin: 10px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .header-personal-img {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 80px !important;
+    height: 80px !important;
+    border-width: 3px !important;
+    margin: 0 auto 10px auto !important;
+    display: block !important;
+  }
+  .hero-content {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .hero-content h1 {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+  }
+  .offer-badge {
+    font-size: 15px !important;
+    padding: 6px 16px !important;
+  }
+  .date-box {
+    padding: 8px 14px !important;
+  }
+  .date-box .date-value {
+    font-size: 15px !important;
+  }
+  .countdown-item {
+    min-width: 60px !important;
+    padding: 10px 12px !important;
+  }
+  .countdown-item .number {
+    font-size: 24px !important;
+  }
+  .countdown-header h2 {
+    font-size: 15px !important;
+  }
+  .next-offers-text h3 {
+    font-size: 16px !important;
+  }
+  .next-offers-text p {
+    font-size: 12px !important;
+  }
+  .next-offers-icon {
+    font-size: 32px !important;
+  }
+}
+
+
+/* ===== MAGAZINE MOBILE MULTI-CARD FIX ===== */
+@media (max-width: 768px) {
+  /* Force row wrapper to be column with proper sizing */
+  .magazine-row-wrapper {
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  /* Override the inline flex style – each blob = full width */
+  .magazine-blob-group {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 12px 8px !important;
+    box-sizing: border-box !important;
+  }
+  /* 2 cards per row in the grid inside each blob */
+  .magazine-blob-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  /* Smaller card images on mobile */
+  .magazine-product-card .magazine-product-image-wrapper {
+    height: 130px !important;
+  }
+  /* Smaller header inside blob */
+  .magazine-blob-header {
+    font-size: 12px !important;
+    padding: 5px 10px !important;
+    margin-bottom: 8px !important;
+  }
+  /* Category D name */
+  .magazine-category-d-name {
+    font-size: 11px !important;
+    padding: 3px 6px !important;
+  }
+  /* Page padding */
+  .magazine-page {
+    padding: 12px 6px !important;
+    transform: scale(1) !important;
+  }
+  /* Navigation buttons */
+  .magazine-nav-controls {
+    padding: 10px 15px !important;
+    gap: 12px !important;
+  }
+  .magazine-nav-btn {
+    font-size: 12px !important;
+    padding: 10px 16px !important;
+  }
+}
+
+
+/* ===== OFFER CIRCLE BADGE MOBILE SIZE FIX ===== */
+@media (max-width: 768px) {
+  .magazine-offer-circle {
+    top: -2px !important;
+    left: 50% !important;
+    transform: translateX(-50%) scale(0.42) !important;
+    transform-origin: top center !important;
+  }
+  .magazine-offer-badge-complex {
+    top: -2px !important;
+    transform: translateX(-50%) scale(0.38) !important;
+    transform-origin: top center !important;
+  }
+  .magazine-price-badge {
+    transform: scale(0.40) !important;
+    transform-origin: top left !important;
+  }
+}
+@media (max-width: 480px) {
+  .magazine-offer-circle {
+    transform: translateX(-50%) scale(0.38) !important;
+    transform-origin: top center !important;
+  }
+  .magazine-offer-badge-complex {
+    transform: translateX(-50%) scale(0.35) !important;
+    transform-origin: top center !important;
+  }
+  .magazine-price-badge {
+    transform: scale(0.36) !important;
+    transform-origin: top left !important;
+  }
+}
+
+/* ===== GATEWAY PROFILE IMAGE CIRCLE FIX ===== */
+@media (max-width: 768px) {
+  #gatewayView .header-personal-img {
+    width: 90px !important;
+    height: 90px !important;
+    min-width: 90px !important;
+    min-height: 90px !important;
+    max-width: 90px !important;
+    max-height: 90px !important;
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    transform: none !important;
+    margin: 0 auto 12px auto !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+    align-self: center !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4359,74 +4608,6 @@ body > div:has(> label[for="codesFileInput"]),
     100% { box-shadow: 0 0 0 0 rgba(111, 66, 193, 0); }
 }
 
-/* تحسينات الموبايل */
-@media (max-width: 900px) {
-    .card-content {
-        flex-direction: column;
-        padding: 20px;
-        text-align: center;
-        gap: 20px;
-    }
-    
-    .media-section {
-        width: 100%;
-        flex: auto;
-    }
-    
-    .highlight-box {
-        white-space: normal; /* السماح بالنزول لسطر جديد في الموبايل */
-        display: inline;
-        box-decoration-break: clone;
-        -webkit-box-decoration-break: clone;
-    }
-}
-/* 1️⃣ تجميل شريط السكرول للقوائم المنسدلة (اللي في الصورة) */
-.custom-options-list::-webkit-scrollbar {
-    width: 8px; /* عرض الشريط */
-    display: block !important; /* التأكيد على ظهوره */
-}
-
-.custom-options-list::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05); /* لون الخلفية بتاعة المسار */
-    border-radius: 10px;
-}
-
-.custom-options-list::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* لون المقبض - نفس لون الهيدر */
-    border-radius: 10px;
-    border: 2px solid #1a2647; /* فراغ بسيط عشان يبان محدد */
-}
-
-.custom-options-list::-webkit-scrollbar-thumb:hover {
-    background: #a569bd; /* لونه لما تلمسه بالماوس */
-}
-
-/* 2️⃣ تجميل شريط السكرول للصفحة ككل (Body) */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #0f172a; 
-}
-
-::-webkit-scrollbar-thumb {
-    background: #475569;
-    border-radius: 5px;
-    border: 2px solid #0f172a;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #667eea;
-}
-
-/* 3️⃣ تأكد إن القائمة نفسها بتسمح بالسكرول */
-.custom-options-list {
-    max-height: 250px; /* أو أي ارتفاع تحبه */
-    overflow-y: auto !important;
-    scrollbar-width: thin; /* لدعم متصفح فيرفوكس */
-    scrollbar-color: #667eea rgba(255, 255, 255, 0.1);
-}
 #customOfferTypesList .custom-option {
     display: flex !important;
     align-items: center;
@@ -4513,6 +4694,7 @@ body > div:has(> label[for="codesFileInput"]),
     from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
 }
+
 </style>
 
 <!-- Offer Boxes -->
@@ -4523,153 +4705,6 @@ body > div:has(> label[for="codesFileInput"]),
   
 
             </div>
-        </div>
-    </div>
-</div>
-<div class="global-search-wrapper">
-  <input id="globalSearch" class="global-search-box" type="text" placeholder="🔍 Search by code or name...">
-</div>
-
-<!-- FILTERS -->
-<div class="filter-section">
-  <h2 class="filter-title">🔍 FILTER OFFERS</h2>
-  <div class="filters-container">
-    
-    <!-- Offer Type -->
-    <div class="filter-group">
-      <label>Offer Type</label>
-      <div class="custom-select" data-filter="offerFilter">
-        <div class="custom-select-trigger">
-          <span class="selected-text">All Offers</span>
-          <span class="arrow">▼</span>
-        </div>
-        <div class="custom-select-options">
-          <input type="text" class="custom-select-search" placeholder="Search...">
-          <div class="custom-options-list"></div>
-        </div>
-      </div>
-      <button class="reset-filter-btn" onclick="resetFilter('offerFilter')">🔄 Reset</button>
-    </div>
-
-    <!-- Brand -->
-    <div class="filter-group">
-      <label>Brand</label>
-      <div class="custom-select" data-filter="brandFilter">
-        <div class="custom-select-trigger">
-          <span class="selected-text">All Brands</span>
-          <span class="arrow">▼</span>
-        </div>
-        <div class="custom-select-options">
-          <input type="text" class="custom-select-search" placeholder="Search...">
-          <div class="custom-options-list"></div>
-        </div>
-      </div>
-      <button class="reset-filter-btn" onclick="resetFilter('brandFilter')">🔄 Reset</button>
-    </div>
-
-    <!-- Manufacture -->
-    <div class="filter-group">
-      <label>🏭 MANUFACTURE</label>
-      <div class="custom-select" data-filter="manufactureFilter">
-        <div class="custom-select-trigger">
-          <span class="selected-text">All Manufactures</span>
-          <span class="arrow">▼</span>
-        </div>
-        <div class="custom-select-options">
-          <input type="text" class="custom-select-search" placeholder="Search..." />
-          <div class="custom-options-list"></div>
-        </div>
-      </div>
-      <button class="reset-filter-btn" onclick="resetFilter('manufactureFilter')">🔄 Reset</button>
-    </div>
-
-    <!-- Category A -->
-    <div class="filter-group">
-      <label>Category A</label>
-      <div class="custom-select" data-filter="categoryAFilter">
-        <div class="custom-select-trigger">
-          <span class="selected-text">All Cat A</span>
-          <span class="arrow">▼</span>
-        </div>
-        <div class="custom-select-options">
-          <input type="text" class="custom-select-search" placeholder="Search...">
-          <div class="custom-options-list"></div>
-        </div>
-      </div>
-      <button class="reset-filter-btn" onclick="resetFilter('categoryAFilter')">🔄 Reset</button>
-    </div>
-
-    <!-- Category B -->
-    <div class="filter-group">
-      <label>Category B</label>
-      <div class="custom-select" data-filter="categoryBFilter">
-        <div class="custom-select-trigger">
-          <span class="selected-text">All Cat B</span>
-          <span class="arrow">▼</span>
-        </div>
-        <div class="custom-select-options">
-          <input type="text" class="custom-select-search" placeholder="Search...">
-          <div class="custom-options-list"></div>
-        </div>
-      </div>
-      <button class="reset-filter-btn" onclick="resetFilter('categoryBFilter')">🔄 Reset</button>
-    </div>
-
-    <!-- Item Class -->
-    <div class="filter-group">
-      <label>Item Class</label>
-      <div class="custom-select" data-filter="itemClassFilter">
-        <div class="custom-select-trigger">
-          <span class="selected-text">All Classes</span>
-          <span class="arrow">▼</span>
-        </div>
-        <div class="custom-select-options">
-          <input type="text" class="custom-select-search" placeholder="Search...">
-          <div class="custom-options-list"></div>
-        </div>
-      </div>
-      <button class="reset-filter-btn" onclick="resetFilter('itemClassFilter')">🔄 Reset</button>
-    </div>
-
-    <!-- Category C -->
-    <div class="filter-group">
-      <label>Category C</label>
-      <div class="custom-select" data-filter="categoryCFilter">
-        <div class="custom-select-trigger">
-          <span class="selected-text">All C</span>
-          <span class="arrow">▼</span>
-        </div>
-        <div class="custom-select-options">
-          <input type="text" class="custom-select-search" placeholder="Search...">
-          <div class="custom-options-list"></div>
-        </div>
-      </div>
-      <button class="reset-filter-btn" onclick="resetFilter('categoryCFilter')">🔄 Reset</button>
-    </div>
-
-    <!-- Category D -->
-    <div class="filter-group">
-      <label>Category D</label>
-      <div class="custom-select" data-filter="categoryDFilter">
-        <div class="custom-select-trigger">
-          <span class="selected-text">All D</span>
-          <span class="arrow">▼</span>
-        </div>
-        <div class="custom-select-options">
-          <input type="text" class="custom-select-search" placeholder="Search...">
-          <div class="custom-options-list"></div>
-        </div>
-      </div>
-      <button class="reset-filter-btn" onclick="resetFilter('categoryDFilter')">🔄 Reset</button>
-    </div>
-
-  </div>
-</div>
-
-<!-- زرار إعادة ضبط الفلترات -->
-<button onclick="clearAllFilters()" style="padding:12px 24px; background:linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin:10px; box-shadow: 0 4px 15px rgba(238, 90, 111, 0.4);">
-  🔄 Reset All Filters
-</button>
 
 <div class="products-section" id="productsContainer"></div>
 
@@ -4874,6 +4909,10 @@ body > div:has(> label[for="codesFileInput"]),
     .floating-pdf-btn:hover .btn-text {
         opacity: 1;
     }
+    /* ========================================================
+   📱 السلايدر الأفقي الشامل (للموبايل والتابلت) - تم التحديث
+  
+
 </style>
 
 <button id="exportPDFBtn" class="floating-pdf-btn" onclick="exportFullMagazinePDF()">
@@ -5011,7 +5050,6 @@ async function fetchProductsFromSupabase() {
 
         for (let i = 0; i < uniqueCodes.length; i += CHUNK_SIZE) {
             const chunk = uniqueCodes.slice(i, i + CHUNK_SIZE);
-            // تحويل للأرقام عشان الـ int8 في سوبابيز
             const numericChunk = chunk.map(c => parseInt(c)).filter(n => !isNaN(n));
 
             const { data, error } = await supabaseClient
@@ -5027,10 +5065,10 @@ async function fetchProductsFromSupabase() {
             if (data) allFetchedData = allFetchedData.concat(data);
         }
 
-        // 2️⃣ التعديل المهم: تحويل الكود لـ String فوراً لضمان ظهور الـ 162 صفحة
+        // 2️⃣ تحويل البيانات وتخزينها
         productsDB = allFetchedData.map(p => ({
             ...p,
-            "Code": String(p.code).trim(), // تأكيد إن الكود نص عشان المطابقة مع offersMap
+            "Code": String(p.code).trim(),
             "Item Description": p.item_description || '',
             "Brand": p.brand || '',
             "Manufacture": p.manufacture || '',
@@ -5044,14 +5082,19 @@ async function fetchProductsFromSupabase() {
 
         console.log(`✅ تم تحميل: ${productsDB.length} منتج بنجاح.`);
 
-        // 3️⃣ إعادة التشغيل
-        initOffersMap();
+        // 3️⃣ 🔥 الترتيب الصحيح لإعادة التشغيل وتفعيل البحث
+        initOffersMap();       // رسم خريطة العروض
         
-        // تنظيف الفلاتر عشان ميفضلش حاجز الداتا على 67
+        // الخطوة الأهم: بناء مخزن البحث بالداتا الجديدة
+        if (typeof buildSearchCache === 'function') {
+            buildSearchCache(); 
+        }
+        
+        // تنظيف الفلاتر القديمة
         if (typeof clearAllFilters === 'function') clearAllFilters();
 
-        initializeFilters();
-        applyFilters();
+        initializeFilters();   // تحديث القوائم المنسدلة (البراندات، المصانع...)
+        applyFilters();        // ريندر المنتجات في الصفحة
 
     } catch (err) {
         console.error('❌ فشل ذريع في التحديث:', err.message);
@@ -13647,22 +13690,27 @@ function initFuzzySearch() {
 }
 
 function buildSearchCache() {
-  if (typeof productsDB === 'undefined') return;
-  
-  searchCache = productsDB.filter(p => getOffer(p.Code) !== undefined).map(product => {
-    const offer = getOffer(product.Code);
-    return {
-      code: product.Code.toString(),
-      name: product["Item Description"].toLowerCase(),
-      brand: (product.Brand || '').toLowerCase(),
-      category: (product["Category Level D"] || '').toLowerCase(),
-      offerType: offer ? offer.offerType : '',
-      display: product["Item Description"],
-      fullProduct: product
-    };
-  });
-  
-  console.log(`✅ Search cache built: ${searchCache.length} products`);
+    // التأكد إن فيه داتا أصلاً
+    if (!productsDB || productsDB.length === 0) {
+        console.warn('⚠️ Search cache waiting for productsDB...');
+        return;
+    }
+    
+    searchCache = productsDB.map(product => {
+        const offer = getOffer(product.Code);
+        return {
+            code: String(product.Code).trim(),
+            // دمج الاسم والبراند والكاتيجوري في حقل واحد للبحث السريع
+            name: (product["Item Description"] || "").toLowerCase(),
+            brand: (product.Brand || "").toLowerCase(),
+            category: (product["Category Level D"] || "").toLowerCase(),
+            offerType: offer ? offer.offerType : 'No Offer',
+            display: product["Item Description"] || "No Description",
+            fullProduct: product
+        };
+    });
+    
+    console.log(`🎯 Search Cache Rebuilt: ${searchCache.length} products ready.`);
 }
 
 function handleSearchInput() {
@@ -13684,32 +13732,51 @@ function handleSearchInput() {
 }
 
 function fuzzySearchProducts(query) {
-  if (!searchCache) return [];
+  // 1. التأكد إن الكاش موجود
+  if (!searchCache || searchCache.length === 0) {
+    console.warn("⚠️ Search Cache is empty!");
+    return [];
+  }
   
   const results = [];
-  const queryLower = query.toLowerCase();
+  const queryLower = query.toString().toLowerCase().trim();
   
   searchCache.forEach(item => {
     let score = 0;
     let matchType = '';
     
-    if (item.code.includes(queryLower)) {
+    // تأمين الكود والاسم (تحويلهم لنصوص لضمان عدم توقف الكود)
+    const itemCode = String(item.code || '').toLowerCase();
+    const itemName = String(item.name || '').toLowerCase();
+    const itemBrand = String(item.brand || '').toLowerCase();
+    const itemCategory = String(item.category || '').toLowerCase();
+
+    // --- منطق البحث ---
+
+    // 1. البحث بالكود (أولوية قصوى)
+    if (itemCode.includes(queryLower)) {
       score = 100;
       matchType = 'code';
+      // ميزة إضافية: لو الكود مطابق بالظبط ارفع السكور جداً
+      if (itemCode === queryLower) score += 500; 
     }
-    else if (item.name.includes(queryLower)) {
+    // 2. البحث بالاسم
+    else if (itemName.includes(queryLower)) {
       score = 80;
       matchType = 'name';
     }
-    else if (item.brand.includes(queryLower)) {
+    // 3. البحث بالبراند
+    else if (itemBrand.includes(queryLower)) {
       score = 60;
       matchType = 'brand';
     }
-    else if (item.category.includes(queryLower)) {
+    // 4. البحث بالكاتيجوري
+    else if (itemCategory.includes(queryLower)) {
       score = 40;
       matchType = 'category';
     }
-    else if (fuzzyMatch(item.name, queryLower) || fuzzyMatch(item.brand, queryLower)) {
+    // 5. البحث التقريبي (Fuzzy)
+    else if (typeof fuzzyMatch === 'function' && (fuzzyMatch(itemName, queryLower) || fuzzyMatch(itemBrand, queryLower))) {
       score = 20;
       matchType = 'fuzzy';
     }
@@ -13719,9 +13786,9 @@ function fuzzySearchProducts(query) {
     }
   });
   
+  // ترتيب النتائج: الأعلى سكور يظهر فوق
   return results.sort((a, b) => b.score - a.score);
 }
-
 function fuzzyMatch(text, query) {
   let queryIndex = 0;
   for (let i = 0; i < text.length && queryIndex < query.length; i++) {
@@ -14366,10 +14433,11 @@ function updateSelectedCount() {
     countEl.textContent = `${count} محدد`;
   }
   
-  // التحكم في ظهور الشريط (يظهر فقط لو العدد أكبر من 0)
+  // التحكم في ظهور الشريط
   if (printSelectionBar) {
+      // الشرط ده بيقوله: لو العدد أكبر من صفر "و" إحنا مش في وضع الطباعة
       if (count > 0) {
-          printSelectionBar.style.display = 'inline-flex';
+          printSelectionBar.style.setProperty('display', 'inline-flex', 'important');
       } else {
           printSelectionBar.style.display = 'none';
       }
@@ -14464,8 +14532,7 @@ function renderProducts(filters = {}) {
   
   filteredProducts.sort((a, b) => a["Item Description"].localeCompare(b["Item Description"]));
   
-  // 🔥 INITIAL LOAD CHECK (NO FILTERS = FIRST OPEN)
-  // ✅ إضافة شيك على uploadedCodesFilter
+  // 🔥 INITIAL LOAD CHECK
   const hasUploadedCodesFilter = uploadedCodesFilter && uploadedCodesFilter.length > 0;
   
   const isInitialLoad = !filters.searchTerm && 
@@ -14477,24 +14544,26 @@ function renderProducts(filters = {}) {
                        !filters.itemClass?.length && 
                        !filters.categoryC?.length && 
                        !filters.categoryD?.length &&
-                       !hasUploadedCodesFilter; // ✅ الشيك الجديد
+                       !hasUploadedCodesFilter;
 
   console.log(`📊 ${isInitialLoad ? '🚀 INITIAL' : '✅ FILTERED'}: ${filteredProducts.length} products`);
-  console.log(`   Uploaded codes filter: ${hasUploadedCodesFilter ? uploadedCodesFilter.length : 'none'}`);
 
   updateDynamicFilters(filters);
   
   if (filteredProducts.length === 0) {
     container.innerHTML = '<div style="padding:40px; text-align:center; color:#999;">No products found</div>';
     if(loader) loader.style.display = "none";
+    // تحديث العداد حتى لو مفيش نتائج عشان الشريط يختفي لو مفيش عناصر
+    updateSelectedCount(); 
     return;
   }
 
-  // ✅ CHECK MAGAZINE / BRIEF MODES FIRST
+  // ✅ CHECK MAGAZINE / BRIEF MODES
   if(isMagazineMode) {
     renderMagazineMode(filteredProducts);
     window.currentFilteredProducts = filteredProducts;
     restoreSelections();
+    updateSelectedCount(); // 🔥 إظهار الشريط في وضع المجلة
     if(loader) loader.style.display = "none";
     return;
   }
@@ -14504,28 +14573,24 @@ function renderProducts(filters = {}) {
     window.currentFilteredProducts = filteredProducts;
     createPrintSelectionBar();
     restoreSelections();
+    updateSelectedCount(); // 🔥 إظهار الشريط في وضع الـ Brief
     if(loader) loader.style.display = "none";
     return;
   }
   
-  // 🔥 حفظ العدد الكلي قبل التحديد
   window.fullProductsCount = filteredProducts.length;
   
-  // 🔥 INITIAL LOAD: LIMIT TO 30 + Load All Button
   let showLoadAllButton = false;
-  
   if (isInitialLoad && filteredProducts.length > 30) {
     showLoadAllButton = true;
-    filteredProducts = filteredProducts.slice(0, 30); // 30 بس!
-    console.log(`🚀 Initial load: limiting to 30 of ${window.fullProductsCount} products`);
+    filteredProducts = filteredProducts.slice(0, 30);
   }
   
-  // 🔥 NORMAL RENDER (مع الـ limited products لو initial)
   container.innerHTML = ""; 
   renderingQueue = []; 
   
   const groupStructure = {};
-  filteredProducts.forEach(product => {  // استخدم الـ filteredProducts المحدود
+  filteredProducts.forEach(product => {
     const catA = product["Category Level A"] || "Uncategorized";
     const catD = product["Category Level D"] || "Other";
     const offer = getOffer(product.Code);
@@ -14546,21 +14611,14 @@ function renderProducts(filters = {}) {
   
   sortedCatAs.forEach(catA => {
       renderingQueue.push({ type: 'HEADER_A', title: catA });
-      
       const catDs = groupStructure[catA];
       Object.keys(catDs).sort().forEach(catD => {
-          renderingQueue.push({ 
-              type: 'HEADER_D', 
-              catA: catA, 
-              catD: catD
-          });
-          
+          renderingQueue.push({ type: 'HEADER_D', catA: catA, catD: catD });
           const offerTypes = catDs[catD];
           Object.keys(offerTypes).sort().forEach(offerType => {
               renderingQueue.push({ 
                   type: 'BLOCK_OFFER', 
-                  catA: catA, 
-                  catD: catD,
+                  catA: catA, catD: catD,
                   offerType: offerType,
                   products: offerTypes[offerType]
               });
@@ -14570,49 +14628,18 @@ function renderProducts(filters = {}) {
   
   processRenderQueue();
   
-  // 🔥 LOAD ALL BUTTON (بعد الـ render عشان يتحط في الآخر)
   if (showLoadAllButton) {
     const loadAllBtnContainer = document.createElement('div');
-    loadAllBtnContainer.style.cssText = `
-      grid-column: 1 / -1;
-      display: flex;
-      justify-content: center;
-      margin: 30px 0;
-    `;
+    loadAllBtnContainer.style.cssText = `grid-column: 1 / -1; display: flex; justify-content: center; margin: 30px 0;`;
     
     const loadAllBtn = document.createElement('button');
     loadAllBtn.id = 'loadAllBtn';
     loadAllBtn.innerHTML = `🔥 Load All Products (${window.fullProductsCount} items)`;
-    loadAllBtn.style.cssText = `
-      display: block;
-      padding: 16px 48px;
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: white;
-      border: none;
-      border-radius: 15px;
-      font-weight: 700;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    `;
-    
-    loadAllBtn.onmouseover = () => {
-      loadAllBtn.style.transform = 'translateY(-3px)';
-      loadAllBtn.style.boxShadow = '0 12px 35px rgba(16, 185, 129, 0.6)';
-    };
-    
-    loadAllBtn.onmouseout = () => {
-      loadAllBtn.style.transform = 'translateY(0)';
-      loadAllBtn.style.boxShadow = '0 8px 25px rgba(16, 185, 129, 0.4)';
-    };
+    loadAllBtn.style.cssText = `display: block; padding: 16px 48px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; border-radius: 15px; font-weight: 700; font-size: 18px; cursor: pointer; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;`;
     
     loadAllBtn.onclick = () => {
-      console.log('🔥 Loading all products...');
       loadAllBtnContainer.remove();
-      renderProducts(filters); // إعادة الـ render بدون limit
+      renderProducts(filters);
     };
     
     loadAllBtnContainer.appendChild(loadAllBtn);
@@ -14620,14 +14647,18 @@ function renderProducts(filters = {}) {
   }
   
   window.currentFilteredProducts = filteredProducts;
-  createPrintSelectionBar();
+  
+  // ✅ التأكد من وجود الشريط وتحديث حالته فوراً
+  if (!document.getElementById('printSelectionBar')) {
+      createPrintSelectionBar();
+  }
+  
   restoreSelections();
+  updateSelectedCount(); // 🔥 تحديث العداد وإظهار الـ Bar لو فيه مختارين
   
   if(loader) loader.style.display = "none";
-  
   console.log(`✅ Rendered ${filteredProducts.length} products`);
 }
-
 // ====== 📋 BRIEF MODE RENDERING - BY OFFER TYPE FIRST ======
 function renderBriefMode(filteredProducts) {
   const container = document.getElementById("productsContainer");
@@ -14917,6 +14948,7 @@ function processRenderQueue() {
                 const rowProducts = sortedProducts.slice(i, i + ITEMS_PER_ROW);
                 
                 const rowWrapper = document.createElement('div');
+                rowWrapper.className = 'offer-row-wrapper';
                 rowWrapper.style.cssText = `display: flex; width: 100%; gap: 15px; margin-bottom: 20px;`;
 
                 // تجميع منتجات الصف حسب البراند
@@ -14935,6 +14967,7 @@ function processRenderQueue() {
                     const brandColor = stringToColor(brandName);
 
                     const brandCluster = document.createElement('div');
+                    brandCluster.className = 'brand-cluster-card';
                     brandCluster.style.cssText = `
                         width: ${widthPercent}%;
                         display: flex;
@@ -15104,7 +15137,7 @@ function processRenderQueue() {
                                         ` : ''}
                                         <span style="color: ${showStrikethrough ? '#dc2626' : '#0f172a'}; font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 2px;">
                                             ${finalPrice.toFixed(2)} 
-                                            <img src="${RIYAL_SVG_URL}" style="width: 12px; height: 12px;" alt="SAR"/>
+                                            <img src="${RIYAL_SVG_URL}" style="width:14px!important;height:14px!important;max-width:14px!important;max-height:14px!important;min-width:14px;min-height:14px;flex-shrink:0;display:inline-block!important;" alt="SAR"/>
                                         </span>
                                     </div>
                                     
@@ -17925,6 +17958,9 @@ async function renderMagazineMode(filteredProducts) {
       if (IS_IOS) {
         magazineSettings.rowsPerPage = 3;
         magazineSettings.itemsPerRow = 3;
+      } else if (window.innerWidth <= 768) {
+        magazineSettings.rowsPerPage = magazineSettings.rowsPerPage || 3;
+        magazineSettings.itemsPerRow = 2;
       } else {
         magazineSettings.rowsPerPage = magazineSettings.rowsPerPage || 4;
         magazineSettings.itemsPerRow = magazineSettings.itemsPerRow || 4;
