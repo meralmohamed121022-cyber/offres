@@ -5003,7 +5003,12 @@ infoBox.addEventListener('click', toggleInfoBox);
 // 1️⃣ تأكد إن التعريف فوق خالص كده
 const supabaseUrl = 'https://vyvtoaplrdnjskomnoou.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5dnRvYXBscmRuanNrb21ub291Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyMzEwNjksImV4cCI6MjA5MDgwNzA2OX0.yTMKiK-zjYM36YvZ8U-yFQDW5NH4Xdi0Cju80mi1B7E';
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey); // استخدمنا supabaseClient هنا
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey, {
+    realtime: { params: { eventsPerSecond: -1 } },
+    auth: { persistSession: false, autoRefreshToken: false }
+});
+// ❌ قطع WebSocket فورًا — بيحل مشكلة البطء على شبكات الشركات والمكتب
+try { supabaseClient.realtime.disconnect(); } catch(e) {}
 
 let productsDB = []; 
 
