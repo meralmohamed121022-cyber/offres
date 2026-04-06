@@ -12,12 +12,13 @@
 <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/meralmohamed121022-cyber/Drug-Monograph/858ba78ce2719a0e7069fd4807b725e0002a17d8/6_20251129_184528_0005.png">
 
 <!-- ====== 🔒 SECURITY HEADERS ====== -->
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-<meta http-equiv="X-XSS-Protection" content="1; mode=block">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()"></head>
+
+
+
+
+</head>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; img-src * data: blob:; connect-src *; font-src * data:; frame-ancestors *;">
 <title>Pharmacy Premium Offers</title>
 <style>
@@ -5008,17 +5009,56 @@ let productsDB = [];
 
 
 async function fetchProductsFromSupabase() {
-    console.log('📡 جاري تنظيف الذاكرة وجلب الداتا الجديدة...');
     const loader = document.getElementById("loadingIndicator");
     const container = document.getElementById("productsContainer");
-    
-    if(loader) loader.style.display = "block";
+    if (loader) loader.style.display = "block";
+
+    // ─── CACHE CONFIG ───
+    const CACHE_KEY   = 'productsDB_cache_v2';
+    const CACHE_TS_KEY = 'productsDB_cache_ts';
+    const CACHE_TTL   = 30 * 60 * 1000; // 30 دقيقة
+
+    function loadFromCache() {
+        try {
+            const ts = parseInt(localStorage.getItem(CACHE_TS_KEY) || '0');
+            if (Date.now() - ts > CACHE_TTL) return null;
+            const raw = localStorage.getItem(CACHE_KEY);
+            return raw ? JSON.parse(raw) : null;
+        } catch(e) { return null; }
+    }
+
+    function saveToCache(data) {
+        try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+            localStorage.setItem(CACHE_TS_KEY, String(Date.now()));
+        } catch(e) { console.warn('Cache save failed (storage full?):', e.message); }
+    }
+
+    function applyData(data) {
+        productsDB = data;
+        initOffersMap();
+        if (typeof buildSearchCache  === 'function') buildSearchCache();
+        if (typeof clearAllFilters   === 'function') clearAllFilters();
+        initializeFilters();
+        applyFilters();
+    }
+
+    // ─── 1. INSTANT CACHE HIT ───
+    const cached = loadFromCache();
+    if (cached && cached.length > 0) {
+        console.log(`⚡ من الكاش: ${cached.length} منتج (فوري)`);
+        applyData(cached);
+        if (loader) loader.style.display = "none";
+        // Refresh cache in background silently
+        setTimeout(() => fetchAndCacheInBackground(), 500);
+        return;
+    }
+
+    // ─── 2. FRESH FETCH (no cache) ───
+    if (container) container.innerHTML = '';
+    productsDB = [];
 
     try {
-        // 1️⃣ تصفير الداتا القديمة
-        productsDB = []; 
-        if(container) container.innerHTML = ''; 
-
         const codesToFetch = new Set();
         if (typeof offersDB !== 'undefined') {
             offersDB.forEach(offer => {
@@ -5032,65 +5072,115 @@ async function fetchProductsFromSupabase() {
         }
 
         const uniqueCodes = Array.from(codesToFetch);
-        console.log(`🔎 إجمالي الأكواد في offersDB: ${uniqueCodes.length}`);
+        console.log(`📡 جلب ${uniqueCodes.length} كود من Supabase (بالتوازي)...`);
 
-        let allFetchedData = [];
-        const CHUNK_SIZE = 1000; 
-
+        const CHUNK_SIZE = 500;
+        const chunks = [];
         for (let i = 0; i < uniqueCodes.length; i += CHUNK_SIZE) {
-            const chunk = uniqueCodes.slice(i, i + CHUNK_SIZE);
-            const numericChunk = chunk.map(c => parseInt(c)).filter(n => !isNaN(n));
-
-            const { data, error } = await supabaseClient
-                .from('products')
-                .select('*')
-                .in('code', numericChunk)
-                .limit(1000); 
-
-            if (error) {
-                console.error(`❌ خطأ في الدفعة ${i}:`, error.message);
-                continue; 
-            }
-            if (data) allFetchedData = allFetchedData.concat(data);
+            chunks.push(uniqueCodes.slice(i, i + CHUNK_SIZE));
         }
 
-        // 2️⃣ تحويل البيانات وتخزينها
-        productsDB = allFetchedData.map(p => ({
+        // ─── PARALLEL FETCH ───
+        const results = await Promise.all(
+            chunks.map(chunk => {
+                const numericChunk = chunk.map(c => parseInt(c)).filter(n => !isNaN(n));
+                return supabaseClient
+                    .from('products')
+                    .select('code,item_description,brand,manufacture,category_level_a,category_level_b,category_level_c,category_level_d,unit_price,itemurl')
+                    .in('code', numericChunk)
+                    .limit(500);
+            })
+        );
+
+        let allFetchedData = [];
+        results.forEach(({ data, error }, idx) => {
+            if (error) { console.error(`❌ chunk ${idx}:`, error.message); return; }
+            if (data) allFetchedData = allFetchedData.concat(data);
+        });
+
+        const mapped = allFetchedData.map(p => ({
             ...p,
-            "Code": String(p.code).trim(),
+            "Code":             String(p.code).trim(),
             "Item Description": p.item_description || '',
-            "Brand": p.brand || '',
-            "Manufacture": p.manufacture || '',
+            "Brand":            p.brand || '',
+            "Manufacture":      p.manufacture || '',
             "Category Level A": p.category_level_a || '',
             "Category Level B": p.category_level_b || '',
             "Category Level C": p.category_level_c || '',
             "Category Level D": p.category_level_d || '',
-            "Unit Price": p.unit_price || 0,
-            "itemurl": p.itemurl || ''
+            "Unit Price":       p.unit_price || 0,
+            "itemurl":          p.itemurl || ''
         }));
 
-        console.log(`✅ تم تحميل: ${productsDB.length} منتج بنجاح.`);
-
-        // 3️⃣ 🔥 الترتيب الصحيح لإعادة التشغيل وتفعيل البحث
-        initOffersMap();       // رسم خريطة العروض
-        
-        // الخطوة الأهم: بناء مخزن البحث بالداتا الجديدة
-        if (typeof buildSearchCache === 'function') {
-            buildSearchCache(); 
-        }
-        
-        // تنظيف الفلاتر القديمة
-        if (typeof clearAllFilters === 'function') clearAllFilters();
-
-        initializeFilters();   // تحديث القوائم المنسدلة (البراندات، المصانع...)
-        applyFilters();        // ريندر المنتجات في الصفحة
+        console.log(`✅ تم تحميل: ${mapped.length} منتج`);
+        saveToCache(mapped);
+        applyData(mapped);
 
     } catch (err) {
-        console.error('❌ فشل ذريع في التحديث:', err.message);
+        console.error('❌ خطأ في fetchProductsFromSupabase:', err.message);
     } finally {
-        if(loader) loader.style.display = "none";
+        if (loader) loader.style.display = "none";
     }
 }
+
+// Background refresh without blocking UI
+async function fetchAndCacheInBackground() {
+    try {
+        const codesToFetch = new Set();
+        if (typeof offersDB !== 'undefined') {
+            offersDB.forEach(offer => {
+                if (offer.codes && Array.isArray(offer.codes)) {
+                    offer.codes.forEach(code => {
+                        const clean = String(code).trim();
+                        if (clean) codesToFetch.add(clean);
+                    });
+                }
+            });
+        }
+        const uniqueCodes = Array.from(codesToFetch);
+        const CHUNK_SIZE = 500;
+        const chunks = [];
+        for (let i = 0; i < uniqueCodes.length; i += CHUNK_SIZE) {
+            chunks.push(uniqueCodes.slice(i, i + CHUNK_SIZE));
+        }
+        const results = await Promise.all(
+            chunks.map(chunk => {
+                const numericChunk = chunk.map(c => parseInt(c)).filter(n => !isNaN(n));
+                return supabaseClient
+                    .from('products')
+                    .select('code,item_description,brand,manufacture,category_level_a,category_level_b,category_level_c,category_level_d,unit_price,itemurl')
+                    .in('code', numericChunk)
+                    .limit(500);
+            })
+        );
+        let allFetchedData = [];
+        results.forEach(({ data, error }) => {
+            if (error) return;
+            if (data) allFetchedData = allFetchedData.concat(data);
+        });
+        if (allFetchedData.length > 0) {
+            const mapped = allFetchedData.map(p => ({
+                ...p,
+                "Code":             String(p.code).trim(),
+                "Item Description": p.item_description || '',
+                "Brand":            p.brand || '',
+                "Manufacture":      p.manufacture || '',
+                "Category Level A": p.category_level_a || '',
+                "Category Level B": p.category_level_b || '',
+                "Category Level C": p.category_level_c || '',
+                "Category Level D": p.category_level_d || '',
+                "Unit Price":       p.unit_price || 0,
+                "itemurl":          p.itemurl || ''
+            }));
+            localStorage.setItem('productsDB_cache_v2', JSON.stringify(mapped));
+            localStorage.setItem('productsDB_cache_ts', String(Date.now()));
+            console.log('🔄 كاش محدث في الخلفية:', mapped.length, 'منتج');
+        }
+    } catch(e) {
+        console.warn('Background refresh failed:', e.message);
+    }
+}
+
     // ========== IMAGES DB (New Structure) ==========
 const categoryImagesDB = {
     "APHRODISIAC":            { icon: "img", hero: "img" },
